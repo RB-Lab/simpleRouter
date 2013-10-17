@@ -85,4 +85,29 @@ describe('Testing whole routing.', function(){
 		router.setHook('off','path', on);
 		window.location.hash = '#!/no/one';
 	});
+	
+	it('Testing forced route...', function (done) {
+		function on (route) {
+			expect(route).to.be.an(Array);
+			expect(route.length).to.eql(2);
+			expect(route[0]).to.eql('no');
+			expect(route[1]).to.eql('one');
+			done();
+		}
+		
+		var router  = new Router();
+		router.setHook('on','no', on);
+		router.route();
+	});
+	
+	it('Testing empty route (#!)...', function (done) {
+		function on (route) {
+			expect(route).to.be.an(Array);
+			expect(route.length).to.eql(0);
+			done();
+		}
+		
+		var router  = new Router(on);
+		window.location.hash = '#!';
+	});
 });

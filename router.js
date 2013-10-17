@@ -68,4 +68,8 @@ function Router (on, off, hashPrefix) {
 		
 		hooks[route][action] = hook;
 	};
+	
+	this.route = function () {
+		route(window.location.hash);
+	}
 }
